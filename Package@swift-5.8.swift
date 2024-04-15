@@ -31,12 +31,13 @@ let package = Package(name: "Alamofire",
                                   .tvOS(.v11),
                                   .watchOS(.v4)],
                       products: [
-                          .library(name: "Alamofire", targets: ["Alamofire"]),
-                          .library(name: "AlamofireDynamic", type: .dynamic, targets: ["Alamofire"])
+                        .library(name: "Alamofire", targets: ["Alamofire"]),
+                        .library(name: "AlamofireDynamic", type: .dynamic, targets: ["Alamofire"])
                       ],
                       targets: [.target(name: "Alamofire",
                                         path: "Source",
-                                        exclude: ["Info.plist", "PrivacyInfo.xcprivacy"],
+                                        exclude: ["Info.plist"],
+                                        resources: [.process("PrivacyInfo.xcprivacy")],
                                         linkerSettings: [.linkedFramework("CFNetwork",
                                                                           .when(platforms: [.iOS,
                                                                                             .macOS,
