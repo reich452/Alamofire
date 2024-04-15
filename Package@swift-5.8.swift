@@ -25,27 +25,50 @@
 
 import PackageDescription
 
-let package = Package(name: "Alamofire",
-                      platforms: [.macOS(.v10_13),
-                                  .iOS(.v11),
-                                  .tvOS(.v11),
-                                  .watchOS(.v4)],
-                      products: [
-                        .library(name: "Alamofire", targets: ["Alamofire"]),
-                        .library(name: "AlamofireDynamic", type: .dynamic, targets: ["Alamofire"])
-                      ],
-                      targets: [.target(name: "Alamofire",
-                                        path: "Source",
-                                        exclude: ["Info.plist"],
-                                        resources: [.process("Resources/PrivacyInfo.xcprivacy")],
-                                        linkerSettings: [.linkedFramework("CFNetwork",
-                                                                          .when(platforms: [.iOS,
-                                                                                            .macOS,
-                                                                                            .tvOS,
-                                                                                            .watchOS]))]),
-                                .testTarget(name: "AlamofireTests",
-                                            dependencies: ["Alamofire"],
-                                            path: "Tests",
-                                            exclude: ["Info.plist", "Test Plans"],
-                                            resources: [.process("Resources")])],
-                      swiftLanguageVersions: [.v5])
+let package = Package(
+    name: "Alamofire",
+    platforms: [
+        .macOS(.v10_15),
+        .iOS(.v13),
+        .tvOS(.v13),
+        .watchOS(.v6)
+    ],
+    products: [
+        .library(
+            name: "Alamofire",
+            targets: ["Alamofire"]
+        ),
+        .library(
+            name: "AlamofireDynamic",
+            type: .dynamic,
+            targets: ["Alamofire"]
+        )
+    ],
+    dependencies: [
+        // List any dependencies here if there are any external dependencies required
+    ],
+    targets: [
+        .target(
+            name: "Alamofire",
+            dependencies: [],
+            path: "Source",
+            exclude: ["Info.plist"],
+            resources: [
+                .process("Resources/PrivacyInfo.xcprivacy")
+            ],
+            linkerSettings: [
+                .linkedFramework("CFNetwork", .when(platforms: [.iOS, .macOS, .tvOS, .watchOS]))
+            ]
+        ),
+        .testTarget(
+            name: "AlamofireTests",
+            dependencies: ["Alamofire"],
+            path: "Tests",
+            exclude: ["Info.plist", "Test Plans"],
+            resources: [
+                .process("Resources")
+            ]
+        )
+    ]
+)
+
