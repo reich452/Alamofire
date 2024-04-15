@@ -54,7 +54,7 @@ let package = Package(
             path: "Source",
             exclude: ["Info.plist"],
             resources: [
-                .process("Resources/PrivacyInfo.xcprivacy")
+                .copy("Resources/PrivacyInfo.xcprivacy")
             ],
             linkerSettings: [
                 .linkedFramework("CFNetwork", .when(platforms: [.iOS, .macOS, .tvOS, .watchOS]))
